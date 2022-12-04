@@ -1,21 +1,8 @@
 package easy;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class RomanToIntSimple {
     public int romanToInt(String s) {
-
         int result = 0;
-
-        Map<Character, Integer> map = new HashMap<>();
-        map.put('I', 1);
-        map.put('V', 5);
-        map.put('X', 10);
-        map.put('L', 50);
-        map.put('C', 100);
-        map.put('D', 500);
-        map.put('M', 1000);
 
         char[] array = s.toCharArray();
 
@@ -36,9 +23,16 @@ public class RomanToIntSimple {
                     result-=200;
             }
 
-            result+=map.get(array[i]);
+            switch(array[i]){
+                case 'I' : result+=1; break;
+                case 'V' : result+=5; break;
+                case 'X' : result+=10; break;
+                case 'L' : result+=50; break;
+                case 'C' : result+=100; break;
+                case 'D' : result+=500; break;
+                case 'M' : result+=1000; break;
+            }
         }
-
         return result;
     }
 
