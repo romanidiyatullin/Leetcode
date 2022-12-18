@@ -1,34 +1,38 @@
 package easy;
 
+import java.util.Arrays;
+
 public class RemoveDuplicates {
     public int removeDuplicates(int[] nums) {
 
-        if(nums == null || nums.length == 0) return 0;
+        if(nums == null || nums.length == 0 || nums.length > 30000)
+            return -1;
 
         int duplicates = 0;
+        int l = nums.length-1;
 
-        for(int i=0; i<nums.length; i++){
+        for(int i=0; i<=l; i++)
+        {
 
-            if(nums[i] == 999){
-                for(int k = i+1; k<nums.length; k++){
-                    if(nums[k] != 999){
-                        nums[i] = nums[k];
-                        nums[k] = 999;
-                        break;
-                    }
-                }
+            if (nums[i] == 999)
+            {
+                nums[i] = nums[l];
+                nums[l] = 999;
+                l--;
             }
 
-            if(nums[i] == 999) break;
-
-            for(int j=i+1; j<nums.length; j++){
-
-                if(nums[i] == nums[j]) {
-                    duplicates++;
+            for (int j = i + 1; j <= l; j++)
+            {
+                if (nums[i] == nums[j]) {
                     nums[j] = 999;
+                    duplicates++;
                 }
             }
+
+            while (nums[l] == 999)
+                l--;
         }
+        Arrays.sort(nums);
         return (nums.length-duplicates);
     }
 
