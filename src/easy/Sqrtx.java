@@ -57,7 +57,5 @@ public class Sqrtx {
         result = sqrtx.mySqrt2(2147395599);
         end = System.nanoTime();
         System.out.println(result + " elapsed: " + (end-start));
-
-        System.out.println();
     }
 }
