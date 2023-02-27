@@ -36,7 +36,7 @@ public class MergeSortedArray88 {
                 // or we found 'imperfection' where element from left need to be swapped with element to the right
 
                 // let's find 'imperfection' element to the right:
-                while (array[j] > array[pivotIndex])
+                while (array[j] > pivotValue)
                     j--;
 
                 // ok, so here we either passed through all elements to the right from pivot element
