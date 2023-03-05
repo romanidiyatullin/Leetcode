@@ -20,6 +20,8 @@ class TreeNode {
 
  class BinaryTreeInorderTraversal94 {
 
+    boolean isPopHappened = false;
+
     public List<Integer> inorderTraversal(TreeNode root) {
 
         /*
@@ -27,38 +29,33 @@ class TreeNode {
             Output: []
          */
         if(root==null)
-            return new ArrayList<Integer>();
+            return new ArrayList<>();
 
         /*
             Input: root = [1]
             Output: [1]
          */
         if(root.left==null && root.right == null)
-            return Arrays.asList(root.val);
+            return List.of(root.val);
 
 
         List<Integer> resultList = new ArrayList<>();
 
-        List<TreeNode> visitedList = new ArrayList<>();
-
         Stack<TreeNode> stack = new Stack<>();
 
-        traverse(root, resultList, visitedList, stack);
+        traverse(root, resultList, stack);
 
         return resultList;
     }
 
-    public void traverse(TreeNode node, List<Integer> resultList, List<TreeNode> visitedList, Stack<TreeNode> stack){
+    public void traverse(TreeNode node, List<Integer> resultList, Stack<TreeNode> stack){
 
         if(node!=null) {
+
             TreeNode currentNode = node;
 
-            // Distinguish if we got node from stack.pop() or this is a new node on our path
-            if (!visitedList.contains(currentNode)) {
-
-                // Mark that node is visited
-                visitedList.add(currentNode);
-
+            if(!isPopHappened)
+            {
                 if (currentNode.left != null) {
                     stack.push(currentNode);
                     currentNode = currentNode.left;
@@ -68,17 +65,21 @@ class TreeNode {
                 } else {
                     resultList.add(currentNode.val);
                     currentNode = stack.isEmpty() ? null : stack.pop();
+                    isPopHappened = true;
                 }
-                traverse(currentNode, resultList, visitedList, stack);
-            } else {
+                traverse(currentNode, resultList, stack);
+            }
+            else {
+                isPopHappened = false;
                 resultList.add(currentNode.val);
 
                 if (currentNode.right != null) {
                     currentNode = currentNode.right;
-                    traverse(currentNode, resultList, visitedList, stack);
+                    traverse(currentNode, resultList, stack);
                 } else if (!stack.isEmpty()) {
                     currentNode = stack.pop();
-                    traverse(currentNode, resultList, visitedList, stack);
+                    isPopHappened = true;
+                    traverse(currentNode, resultList, stack);
                 }
             }
         }
