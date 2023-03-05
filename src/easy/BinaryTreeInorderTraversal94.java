@@ -1,9 +1,7 @@
 package easy;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Stack;
 
 class TreeNode {
       int val;
@@ -20,69 +18,22 @@ class TreeNode {
 
  class BinaryTreeInorderTraversal94 {
 
-    boolean isPopHappened = false;
-
     public List<Integer> inorderTraversal(TreeNode root) {
-
-        /*
-            Input: root = []
-            Output: []
-         */
-        if(root==null)
+        if(root == null)
             return new ArrayList<>();
+        return traverse(root, new ArrayList<>());
 
-        /*
-            Input: root = [1]
-            Output: [1]
-         */
-        if(root.left==null && root.right == null)
-            return List.of(root.val);
-
-
-        List<Integer> resultList = new ArrayList<>();
-
-        Stack<TreeNode> stack = new Stack<>();
-
-        traverse(root, resultList, stack);
-
-        return resultList;
     }
 
-    public void traverse(TreeNode node, List<Integer> resultList, Stack<TreeNode> stack){
+    private List<Integer> traverse(TreeNode node, List<Integer> list){
 
-        if(node!=null) {
+        if(node == null)
+            return list;
 
-            TreeNode currentNode = node;
+        list = traverse(node.left, list);
+        list.add(node.val);
 
-            if(!isPopHappened)
-            {
-                if (currentNode.left != null) {
-                    stack.push(currentNode);
-                    currentNode = currentNode.left;
-                } else if (currentNode.right != null) {
-                    resultList.add(currentNode.val);
-                    currentNode = currentNode.right;
-                } else {
-                    resultList.add(currentNode.val);
-                    currentNode = stack.isEmpty() ? null : stack.pop();
-                    isPopHappened = true;
-                }
-                traverse(currentNode, resultList, stack);
-            }
-            else {
-                isPopHappened = false;
-                resultList.add(currentNode.val);
-
-                if (currentNode.right != null) {
-                    currentNode = currentNode.right;
-                    traverse(currentNode, resultList, stack);
-                } else if (!stack.isEmpty()) {
-                    currentNode = stack.pop();
-                    isPopHappened = true;
-                    traverse(currentNode, resultList, stack);
-                }
-            }
-        }
+        return traverse(node.right, list);
     }
 
      public static void main(String[] args) {
