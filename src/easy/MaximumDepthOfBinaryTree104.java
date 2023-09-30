@@ -10,9 +10,7 @@ public class MaximumDepthOfBinaryTree104 {
         if(root.left == null && root.right == null)
             return 1;
 
-        int levels = Math.max(maxDepth(root.left), maxDepth(root.right)) +1;
-
-        return levels;
+        return Math.max(maxDepth(root.left), maxDepth(root.right)) +1;
     }
 
     public static void main(String[] args) {
