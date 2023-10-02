@@ -11,7 +11,7 @@ public class BestTimeBuySellStock121 {
         int diff;
         int minimalPrice = Integer.MAX_VALUE;
 
-        for(int i : prices){
+        for(int i =0; i<prices.length-1; i++){
             minimalPrice = Math.min(prices[i], minimalPrice);
             diff = prices[i] - minimalPrice;
             profit = Math.max(diff, profit);
