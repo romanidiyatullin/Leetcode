@@ -6,8 +6,6 @@ import java.util.HashSet;
 class MyListNode {
     int val;
     MyListNode next;
-    MyListNode() {}
-    MyListNode(int val) { this.val = val; }
     MyListNode(int val, MyListNode next) { this.val = val; this.next = next; }
 
     public String toString(){
@@ -23,7 +21,7 @@ public class LinkedListCycle141 {
 
         int counter = 0;
 
-        while(head!=null || counter<=10000){
+        while(true){
 
             if(set.contains(head))
                 return true;
@@ -37,7 +35,6 @@ public class LinkedListCycle141 {
 
             counter++;
         }
-        return false;
     }
 //3 2 0 -4
     public static void main(String[] args) {
