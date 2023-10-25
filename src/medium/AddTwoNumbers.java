@@ -7,6 +7,10 @@ class ListNode {
     ListNode() {}
     ListNode(int val) { this.val = val; }
     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+
+    public String toString(){
+        return " "+val+" ";
+    }
 }
 
 
@@ -20,8 +24,7 @@ public class AddTwoNumbers {
         ListNode l3head = null;
 
         int remnants = 0;
-
-        int sum = 0;
+        int sum;
 
         while(l1!=null && l2!=null)
         {
@@ -78,7 +81,7 @@ public class AddTwoNumbers {
     public void addRemnant(ListNode list){
 
         int remnants = 1;
-        int sum = 0;
+        int sum;
         ListNode currentListNode = null;
 
         while(list!=null){
